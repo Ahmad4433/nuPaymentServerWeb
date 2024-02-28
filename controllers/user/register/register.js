@@ -14,6 +14,12 @@ try {
     //     error.statusCode = 400
     //     throw error
     // }
+const isNameExist = await User.findOne({name:name})
+if(isNameExist){
+    const error = new Error('user name already exist')
+    error.statusCode = 400
+    throw error
+}
 
     const isExist = await User.findOne({email:email})
     if(isExist){
