@@ -2,12 +2,12 @@ const User = require("../../../models/User");
 const Payment = require("../../../models/Payment");
 
 const addPayment = async (req, res, next) => {
-  const { data, userName } = req.body;
+  const { data,userId } = req.body;
 
   try {
    
 
-    const findedUser = await User.findOne({name:userName});
+    const findedUser = await User.findById(userId);
     if (!findedUser) {
       const error = new Error("no user found");
       error.statusCode = 400;
@@ -15,7 +15,7 @@ const addPayment = async (req, res, next) => {
     }
     const newPayment = new Payment({
       detail: data,
-      user: findedUser._id,
+      user: userId,
     });
     const savedPayment = await newPayment.save();
     findedUser.paymant.push(savedPayment._id);
