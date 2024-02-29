@@ -6,6 +6,7 @@ const registerUser = async(req,res,next)=>{
 // const {error:validationError} = validateUser(req.body)
     const {email,role,password,currency,name,address,image,bio} = req.body
 
+    const formatedName = name.trim()
 
 
 try {
@@ -33,7 +34,7 @@ if(isNameExist){
     const hashedPassword = await bcrypt.hash(password,10)
     const newUser = new User({
         email:email,password:hashedPassword,role:role,
-        name:name,
+        name:formatedName,
         currency: role==='business'? currency:null,
         address:address,
         image:image,
