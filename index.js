@@ -154,6 +154,7 @@ app.use('/product',productRoute)
 app.use('/admin/user',userListRoutes)
 app.use('/sales',salesUserRoute)
 app.use('/all',combineUsersRoute)
+
 // Error handling middleware
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
