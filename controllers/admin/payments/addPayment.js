@@ -2,16 +2,12 @@ const User = require("../../../models/User");
 const Payment = require("../../../models/Payment");
 
 const addPayment = async (req, res, next) => {
-  const { data, userId } = req.body;
+  const { data, userName } = req.body;
 
   try {
-    if (!userId) {
-      const error = new Error("no user id found");
-      error.statusCode = 400;
-      throw error;
-    }
+   
 
-    const findedUser = await User.findById(userId);
+    const findedUser = await User.findOne({name:userName});
     if (!findedUser) {
       const error = new Error("no user found");
       error.statusCode = 400;
@@ -19,7 +15,7 @@ const addPayment = async (req, res, next) => {
     }
     const newPayment = new Payment({
       detail: data,
-      user: userId,
+      user: findedUser._id,
     });
     const savedPayment = await newPayment.save();
     findedUser.paymant.push(savedPayment._id);
@@ -31,6 +27,7 @@ const addPayment = async (req, res, next) => {
         message: "payment added successfully",
         status: true,
         paymentId: savedPayment._id,
+        user:{name:findedUser.name,image:findedUser.image,email:findedUser.email}
       });
   } catch (error) {
     next(error);
