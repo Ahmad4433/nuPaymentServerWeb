@@ -29,7 +29,7 @@ if(!findedUSer){
     await findedUSer.save()
     receiver.transcation.push(savedTranscation._id)
     await receiver.save()
-    res.status(200).json({message:'success',status:'success'})
+    res.status(200).json({message:'Transaction added successfully',status:'success'})
 } catch (error) {
     next(error)
 }
