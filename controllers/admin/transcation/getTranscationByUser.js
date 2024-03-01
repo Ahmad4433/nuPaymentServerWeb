@@ -10,9 +10,10 @@ const getTranscationByUser = async (req, res, next) => {
       error.statusCode = 400;
       throw error;
     }
-    const list = await User.findById(userId).populate([
+    const list = await User.findById(userId).sort({_id: -1}).populate([
       {
         path: "transcation",
+        
       },
     ]);
 
