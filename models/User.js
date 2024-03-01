@@ -25,7 +25,8 @@ const userSchema = new mongoose.Schema(
     paymant:[{type:mongoose.Types.ObjectId,ref:'Payment'}],
     status:{type:String,default:'active'},
     mobile:{type:Number},
-    address:{type:String}
+    address:{type:String},
+    transcation:[{type:mongoose.Types.ObjectId,ref:'Transcation'}]
   },
   { timestamps: true }
 );

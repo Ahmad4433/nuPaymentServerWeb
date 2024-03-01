@@ -114,6 +114,7 @@ const productRoute = require('./routes/admin/products/product')
 const userListRoutes = require('./routes/admin/user-list/userList')
 const salesUserRoute = require('./routes/admin/sales-user/salesUser')
 const combineUsersRoute  = require('./routes/get-users-from-server/allUsersList')
+const transcationRoutes = require('./routes/admin/transcation/transcation')
 const app = express();
 
 // Set up CORS
@@ -154,7 +155,7 @@ app.use('/product',productRoute)
 app.use('/admin/user',userListRoutes)
 app.use('/sales',salesUserRoute)
 app.use('/all',combineUsersRoute)
-
+app.use('/transcation',transcationRoutes)
 // Error handling middleware
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode || 500;
