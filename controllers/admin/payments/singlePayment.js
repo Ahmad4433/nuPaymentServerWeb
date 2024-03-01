@@ -6,7 +6,14 @@ const {id} = req.body
 
 try {
     
-    const findedPayment= await Payment.findById(id)
+    const findedPayment= await Payment.findById(id).populate([
+
+{
+    path:'user',
+    select:'-password'
+}
+
+    ])
 
     if(!findedPayment){
         const error = new Error('no payment founded')
